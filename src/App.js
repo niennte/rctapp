@@ -14,7 +14,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <p className="App-intro">
-        	Attribute "someprop" is rendered as: {this.props.someprop}!
+		Ciao {this.props.name}!
 	</p>
       </div>
     );

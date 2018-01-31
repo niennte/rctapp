@@ -4,5 +4,10 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App someprop="Some Prop Val"/>, document.getElementById('root'));
+let name = "Stranger";
+
+ReactDOM.render(
+	<App name={name} />,
+	document.getElementById('root')
+);
 registerServiceWorker();
