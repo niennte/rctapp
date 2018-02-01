@@ -5,19 +5,23 @@ class MyComponent extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.state = {
+            foo: 'Click me'
+        };
     }
 
 
     handleClick() {
-        // "this" is now equal to MyComponent object
-        console.log(this);
+        this.setState({
+            foo: 'bar'
+        });
     }
 
 
     render() {
         return(
             <button onClick={this.handleClick}>
-                Click me
+                {this.state.foo}
             </button>
         );
     }
