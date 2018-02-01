@@ -12,13 +12,20 @@ class Clock extends React.Component {
             time: new Date().toLocaleString()
         };
 
-        // bind method to object in callbacks
-        this.updateClock = this.updateClock.bind(this);
     }
 
     componentDidMount() {
         this.intervalId = setInterval(
-            this.updateClock,
+            /*
+            (function() {
+                // "this" is unfedined within an anonymous function
+                // call and Window in a function literal
+                console.log(this);
+                this.updateClock();}
+            )(),
+            */
+            // Lexical value of "this" preserved
+            () => this.updateClock(),
             1000
         );
     }
@@ -28,9 +35,6 @@ class Clock extends React.Component {
     }
 
     updateClock() {
-        // this is equal to Window object
-        // because it is passed as a callback on a global function
-        // console.log(this);
         this.setState({
             time: new Date().toLocaleString()
         });
