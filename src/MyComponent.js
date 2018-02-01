@@ -2,8 +2,14 @@ import React from 'react';
 
 class MyComponent extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+
     handleClick() {
-        // "this" is still undefined
+        // "this" is now equal to MyComponent object
         console.log(this);
     }
 
