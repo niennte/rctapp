@@ -1,14 +1,16 @@
 import React from 'react';
 
-function handleClick() {
-    // "this" is undefined
-    console.log(this);
-}
-
 class MyComponent extends React.Component {
+
+    handleClick() {
+        // "this" is still undefined
+        console.log(this);
+    }
+
+
     render() {
         return(
-            <button onClick={handleClick}>
+            <button onClick={this.handleClick}>
                 Click me
             </button>
         );
