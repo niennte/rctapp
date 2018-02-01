@@ -1,7 +1,5 @@
 import React from 'react';
 
-// timer used here won't be available inside the class
-
 class Clock extends React.Component {
 
     // expects props
@@ -14,7 +12,28 @@ class Clock extends React.Component {
             time: new Date().toLocaleString()
         };
 
-        // timer used here will be triggered when the class is instanciated and not when the component's output is inserted into the DOM 
+        // bind method to object in callbacks
+        this.updateClock = this.updateClock.bind(this);
+    }
+
+    componentDidMount() {
+        this.intervalId = setInterval(
+            this.updateClock,
+            1000
+        );
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
+    }
+
+    updateClock() {
+        // this is equal to Window object
+        // because it is passed as a callback on a global function
+        // console.log(this);
+        this.setState({
+            time: new Date().toLocaleString()
+        });
     }
 
     render() {

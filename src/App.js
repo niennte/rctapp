@@ -3,8 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import Clock from './Clock.js';
 
-let time = new Date().toLocaleString();
-
 class App extends Component {
   render() {
     return (
