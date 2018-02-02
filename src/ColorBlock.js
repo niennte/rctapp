@@ -11,6 +11,12 @@ class ColorBlock extends React.Component {
     this.changeColor = this.changeColor.bind(this);
     }
 
+    componentDidMount() {
+        console.log(this);
+        console.log(this.props);
+    }
+
+
     changeColor() {
         console.log('Handler in Parent');
         // this may not work because of async state stacking
