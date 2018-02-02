@@ -5,17 +5,34 @@ import './ProductTable.css';
 
 class ProductTable extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            sort: {
+                column: 'name',
+                direction: 'desc'
+            }
+        };
+    }
+
+
     render() {
         
-        let productsArray = Object.keys(this.props.products)
+        let productArray = Object.keys(this.props.products)
                 .map((pid) => this.props.products[pid]);
-        let rows = [];
 
-        productsArray.forEach( 
+        let rows = [];
+        productArray.forEach(
             (product) => {
-                rows.push(
-                    <ProductRow product={product} key={product.id}></ProductRow>
-                );
+                if ( product.name.indexOf(this.props.filterText) === -1 ||
+                    (!product.stocked && this.props.inStockOnly)) {
+                    return;
+                } else {
+                    rows.push(
+                        <ProductRow product={product} key={product.id} />
+                    );
+                }
             }
         );
 
