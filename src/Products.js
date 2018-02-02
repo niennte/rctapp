@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import Filters from './Filters.js';
+import ProductTable from './ProductTable.js';
+import ProductForm from './ProductForm.js';
 
-// boilerplate
 class Products extends Component {
     render() {
         return(
-            <p>Products</p>
+            <div>
+                <h4>Products</h4>
+                <Filters / >
+                <ProductTable />
+                <ProductForm />
+            </div>
         );
     }
 }

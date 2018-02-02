@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import ProductTableHeader from './ProductTableHeader.js';
+import ProductRow from './ProductRow.js';
+
 
 class ProductTable extends Component {
     render() {
         return(
-            <p>ProductTable</p>
+            <div>
+                <h4>ProductTable</h4>
+                <ProductTableHeader />
+                <ProductRow />
+            </div>
         );
     }
 }
