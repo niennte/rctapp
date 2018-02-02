@@ -10,6 +10,7 @@ class ChangeColorButton extends React.Component {
     componentDidMount() {
         console.log(this);
         console.log(this.props);
+        console.log(this.state);
     }
  
     handleClickInChild() {
