@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 class Filters extends Component {
     render() {
         return(
-            <p>Filters</p>
+            <form>
+                <input type="text" placeholder="Search" />
+                <p>
+                    <input type="checkbox" />Only show stocked products
+                </p>
+            </form>
         );
     }
 }
