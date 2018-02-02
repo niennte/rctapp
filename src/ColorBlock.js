@@ -39,7 +39,9 @@ class ColorBlock extends React.Component {
                 height: "200px",
                 backgroundColor: this.state.backgroundColor
                 }}>
-                <ChangeColorButton handleClickInParent={this.changeColor} />
+                <ChangeColorButton 
+                    currentColor={this.state.backgroundColor}
+                    handleClickInParent={this.changeColor} />
             </div>
         );
     }
