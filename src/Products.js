@@ -16,10 +16,31 @@ class Products extends Component {
         };
 
         this.handleFilter = this.handleFilter.bind(this);
+        this.saveProduct = this.saveProduct.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
     }
 
     handleFilter(filterInput) {
         this.setState(filterInput);
+    }
+
+    saveProduct(product) {
+        product.id = new Date().getTime();
+        this.setState(
+            (prevState) => {
+                let productData = prevState.productData;
+                productData[product.id] = product;
+                return { productData };
+            }
+        );
+    }
+
+    deleteProduct(productId) {
+        this.setState((prevState) => {
+            let productData = prevState.productData;
+            delete productData[productId];
+            return { productData };
+        });
     }
 
     render() {
@@ -34,9 +55,11 @@ class Products extends Component {
                 <ProductTable
                     products={this.state.productData}  
                     filterText={this.state.filterText} 
-                    inStockOnly={this.state.inStockOnly}>
+                    inStockOnly={this.state.inStockOnly}
+                    onDelete={this.deleteProduct}
+                >
                 </ProductTable>
-                <ProductForm />
+                <ProductForm onSave={this.saveProduct} />
             </div>
         );
     }

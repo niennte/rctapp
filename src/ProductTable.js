@@ -16,6 +16,8 @@ class ProductTable extends Component {
         };
 
         this.sortByColumnAndDirection = this.sortByColumnAndDirection.bind(this);
+        this.handleSort = this.handleSort.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     sortByColumnAndDirection(objectA, objectB) {
@@ -38,6 +40,20 @@ class ProductTable extends Component {
         return productArray.sort(this.sortByColumnAndDirection);         
     }
 
+
+    handleSort(column, direction) {
+        this.setState({
+            sort: {
+                column: column,
+                direction: direction
+            }
+        });
+    }
+
+    handleDelete(id) {
+        this.props.onDelete(id);
+    }
+
     render() {
         let rows = [];
         this.sortProducts().forEach(
@@ -47,7 +63,11 @@ class ProductTable extends Component {
                     return;
                 } else {
                     rows.push(
-                        <ProductRow product={product} key={product.id} />
+                        <ProductRow
+                            product={product}
+                            key={product.id}
+                            onDelete={this.handleDelete}
+                        />
                     );
                 }
             }
@@ -59,11 +79,13 @@ class ProductTable extends Component {
                     <thead>
                         <tr>
                             <ProductTableHeader 
+                                onSort={this.handleSort}
                                 column="name"
                                 currentSort={this.state.sort}
                             >
                             </ProductTableHeader>
                             <ProductTableHeader
+                                onSort={this.handleSort}
                                 column="price"
                                 currentSort={this.state.sort}
                             >
