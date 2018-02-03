@@ -14,6 +14,12 @@ class Products extends Component {
             inStockOnly: false,
             productData: ProductData
         };
+
+        this.handleFilter = this.handleFilter.bind(this);
+    }
+
+    handleFilter(filterInput) {
+        this.setState(filterInput);
     }
 
     render() {
@@ -23,6 +29,7 @@ class Products extends Component {
                 <Filters
                     filterText={this.state.filterText}
                     inStockOnly={this.state.inStockOnly}
+                    onFilter={this.handleFilter}
                 />
                 <ProductTable
                     products={this.state.productData}  
