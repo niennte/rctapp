@@ -12,12 +12,14 @@ class Products extends Component {
         this.state = {
             filterText: '',
             inStockOnly: false,
+            editableProduct: '',
             productData: ProductData
         };
 
         this.handleFilter = this.handleFilter.bind(this);
         this.saveProduct = this.saveProduct.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
+        this.openProductForEditing = this.openProductForEditing.bind(this);
     }
 
     handleFilter(filterInput) {
@@ -25,7 +27,9 @@ class Products extends Component {
     }
 
     saveProduct(product) {
-        product.id = new Date().getTime();
+        if (product.id === '') {
+            product.id = new Date().getTime();
+        }
         this.setState(
             (prevState) => {
                 let productData = prevState.productData;
@@ -33,6 +37,15 @@ class Products extends Component {
                 return { productData };
             }
         );
+        this.setState({
+            editableProduct: ''
+        });
+    }
+
+    openProductForEditing(productId) {
+        this.setState({
+            editableProduct: productId
+        });
     }
 
     deleteProduct(productId) {
@@ -56,6 +69,9 @@ class Products extends Component {
                     products={this.state.productData}  
                     filterText={this.state.filterText} 
                     inStockOnly={this.state.inStockOnly}
+                    editableProduct={this.state.editableProduct}
+                    onEdit={this.openProductForEditing}
+                    onSave={this.saveProduct}
                     onDelete={this.deleteProduct}
                 >
                 </ProductTable>

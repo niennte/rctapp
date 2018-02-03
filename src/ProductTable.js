@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProductTableHeader from './ProductTableHeader.js';
 import ProductRow from './ProductRow.js';
+import ProductForm from './ProductForm.js';
 import './ProductTable.css';
 
 class ProductTable extends Component {
@@ -18,7 +19,10 @@ class ProductTable extends Component {
         this.sortByColumnAndDirection = this.sortByColumnAndDirection.bind(this);
         this.handleSort = this.handleSort.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
+        this.handleSave = this.handleSave.bind(this);
     }
+
 
     sortByColumnAndDirection(objectA, objectB) {
         let isDesc = this.state.sort.direction === 'desc' ? -1 : 1;
@@ -54,8 +58,17 @@ class ProductTable extends Component {
         this.props.onDelete(id);
     }
 
+    handleEdit(id) {
+        this.props.onEdit(id);
+    }
+
+    handleSave(id) {
+        this.props.onSave(id);
+    }
+
     render() {
         let rows = [];
+        let openProductId = this.props.editableProduct;
         this.sortProducts().forEach(
             (product) => {
                 if ( product.name.indexOf(this.props.filterText) === -1 ||
@@ -66,8 +79,22 @@ class ProductTable extends Component {
                         <ProductRow
                             product={product}
                             key={product.id}
+                            onEdit={this.handleEdit}
                             onDelete={this.handleDelete}
                         />
+                    );
+                }
+                // open for editing
+                if (product.id === openProductId) {
+                    rows.push(
+                        <tr key="-1">
+                            <td span="4">
+                                <ProductForm
+                                    openProduct={product} 
+                                    onSave={this.handleSave}
+                                />
+                            </td>
+                        </tr>
                     );
                 }
             }

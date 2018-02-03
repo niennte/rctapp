@@ -5,7 +5,13 @@ class ProductRow extends Component {
 
     constructor(props) {
         super(props);
+
         this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
+    }
+
+    edit() {
+        this.props.onEdit(this.props.product.id);
     }
 
     delete() {
@@ -25,6 +31,11 @@ class ProductRow extends Component {
                 </td>
                 <td>
                     {this.props.product.price}
+                </td>
+                <td>
+                    <button onClick={this.edit} style={{}}>
+                        Edit
+                    </button>
                 </td>
                 <td>
                     <button onClick={this.delete} style={{color: 'red'}}>

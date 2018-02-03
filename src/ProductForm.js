@@ -6,10 +6,17 @@ class ProductForm extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            product: Object.assign({}, RESET_VALUES),
-            errors: {}
-        };
+        if (typeof this.props.openProduct === 'object' && this.props.openProduct !== null) {
+            this.state = {
+                product: this.props.openProduct,
+                errors: {}
+            };
+        } else {
+            this.state = {
+                product: Object.assign({}, RESET_VALUES),
+                errors: {}
+            };
+        }
         this.handleSave = this.handleSave.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -89,6 +96,7 @@ class ProductForm extends Component {
                         In stock?
                     </label>
                 </p>
+                <input type="hidden" name="id" value={this.state.product.id} />
                 <input type="submit" value="Save" onClick={this.handleSave} />
             </form>
         );
