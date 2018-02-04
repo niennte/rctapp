@@ -19,6 +19,27 @@ class ProductForm extends Component {
         }
         this.handleSave = this.handleSave.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+    }
+
+    validateName() {
+        if (this.state.product['name'] === '') {
+            this.setState(
+                (prevState) => {
+                    const errors = prevState.errors;
+                    errors['name'] = "Name is required!";
+                    return { errors: errors};
+                }
+            );
+        } else {
+            this.setState(
+                (prevState) => {
+                    const errors = prevState.errors;
+                    delete errors['name'];
+                    return { errors: errors};
+                }
+            );
+        }
     }
 
     handleChange(e) {
@@ -30,6 +51,12 @@ class ProductForm extends Component {
             prevState.product[name] = value;
             return { product: prevState.product };
         });
+    }
+
+    handleBlur(e) { 
+        if (e.target.name === 'name') {
+            this.validateName();
+        }
     }
 
     handleSave(e) {
@@ -49,7 +76,9 @@ class ProductForm extends Component {
                     <label>
                         Name
                         <br />
+                        {this.state.errors.name}
                         <input 
+                            onBlur={this.handleBlur}
                             onChange={this.handleChange}
                             type="text"
                             name="name"
