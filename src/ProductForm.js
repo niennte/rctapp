@@ -125,7 +125,6 @@ class ProductForm extends Component {
                         In stock?
                     </label>
                 </p>
-                <input type="hidden" name="id" value={this.state.product.id} />
                 <input type="submit" value="Save" onClick={this.handleSave} />
             </form>
         );
