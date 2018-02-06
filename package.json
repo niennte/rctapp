@@ -3,9 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.0.0",
+    "browser-sync": "^2.23.6",
+    "font-awesome": "^4.7.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-filter": "^5.1.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "jquery": "^3.2.1",
+    "popper": "^1.0.1",
+    "popper.js": "^1.12.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0"
+    "react-scripts": "1.1.0",
+    "sass": "^1.0.0-beta.5.2",
+    "stickyfilljs": "^2.0.3",
+    "tooltip.js": "^1.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
