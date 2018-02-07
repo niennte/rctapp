@@ -59,7 +59,7 @@ class Products extends Component {
     render() {
         return(
             <div className="Products">
-                <h4>Products</h4>
+                <h4 className="slender-heading">Products</h4>
                 <Filters
                     filterText={this.state.filterText}
                     inStockOnly={this.state.inStockOnly}

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ProductTableHeader from './ProductTableHeader.js';
 import ProductRow from './ProductRow.js';
 import ProductForm from './ProductForm.js';
-import './ProductTable.css';
 
 class ProductTable extends Component {
 
@@ -102,8 +101,8 @@ class ProductTable extends Component {
 
         return(
             <div>
-                <table className="ProductTable">
-                    <thead>
+                <table className="table">
+                    <thead className="thead-light">
                         <tr>
                             <ProductTableHeader 
                                 onSort={this.handleSort}
@@ -117,6 +116,8 @@ class ProductTable extends Component {
                                 currentSort={this.state.sort}
                             >
                             </ProductTableHeader>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>{rows}</tbody>

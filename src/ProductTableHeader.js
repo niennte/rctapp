@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './ProductTableHeader.css';
 
 class ProductTableHeader extends Component {
 
@@ -10,7 +9,7 @@ class ProductTableHeader extends Component {
     }
 
     handleSort(e) {
-        this.props.onSort(this.props.column, e.target.name);
+        this.props.onSort(this.props.column, e.target.name || e.target.dataset.name);
     }
 
     render() {
@@ -19,19 +18,27 @@ class ProductTableHeader extends Component {
             this.props.currentSort.direction : false;
 
         return(
-            <th>
+            <th className="text-center">
+                <span className="d-inline-block pt-2">
                 {this.props.column}
+                </span>
+                <span className="pull-left">
                 <button
                     onClick={this.handleSort} 
-                    className={currentSort === 'asc' ? "ProductTableHeader-current" : ""} 
+                    className={currentSort === 'asc' ? "btn btn-secondary" : "btn btn-light"} 
                     name='asc'
-                >&#x25B2;</button>
+                >
+                    <i className="fas fa-arrow-down" data-name='asc'></i>
+                </button>
 
                 <button
                     onClick={this.handleSort}
-                    className={currentSort === 'desc' ? "ProductTableHeader-current" : ""}
+                    className={currentSort === 'desc' ? "btn btn-secondary" : "btn btn-light"}
                     name='desc'
-                >&#x25BC;</button>
+                >
+                    <i className="fas fa-arrow-up" data-name="desc"></i>
+                </button>
+                </span>
             </th>
         );
     }

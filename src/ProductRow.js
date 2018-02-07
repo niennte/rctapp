@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './ProductRow.css';
 
 class ProductRow extends Component {
 
@@ -24,7 +23,7 @@ class ProductRow extends Component {
                 <td>
                     <span className={
                         this.props.product.stocked ?
-                            '' : 'ProductRow-out-of-stock'
+                            '' : 'text-danger'
                     }>
                         {this.props.product.name}
                     </span>
@@ -33,13 +32,19 @@ class ProductRow extends Component {
                     {this.props.product.price}
                 </td>
                 <td>
-                    <button onClick={this.edit} style={{}}>
-                        Edit
+                    <button
+                        onClick={this.edit}
+                        className="btn btn-light"
+                    >
+                            Edit
                     </button>
                 </td>
                 <td>
-                    <button onClick={this.delete} style={{color: 'red'}}>
-                        x
+                    <button
+                        onClick={this.delete}
+                        className="btn btn-light text-danger"
+                    >
+                        <i className="fas fa-times"></i>
                     </button>
                 </td>
             </tr>

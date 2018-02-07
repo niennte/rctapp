@@ -19,24 +19,29 @@ class Filters extends Component {
 
     render() {
         return(
-            <form>
-                <input 
-                    type="text" 
-                    placeholder="Search"
-                    // this works either way
-                    value={this.props.filterText}
-                    onChange={this.handleChange}
-                    name="filterText"
-                />
-                <p>
+            <form className="pb-4 row">
+                <div className="form-group col-12 col-md-6">
                     <input
+                        className="form-control" 
+                        type="text" 
+                        placeholder="Search by product name"
+                        value={this.props.filterText}
+                        onChange={this.handleChange}
+                        name="filterText"
+                    />
+                </div>
+                <div className="form-group form-check col-12 col-md-6 pt-md-2 text-center text-md-left">
+                    <input
+                        className="form-check-input"
                         type="checkbox"
-                        // this works either way
                         checked={this.props.inStockOnly}
                         onChange={this.handleChange}
                         name="inStockOnly"
-                    />Only show stocked products
-                </p>
+                    />
+                    <label className="form-check-label">
+                        Only show stocked products
+                    </label>
+                </div>
             </form>
         );
     }

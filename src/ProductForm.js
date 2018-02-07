@@ -69,63 +69,91 @@ class ProductForm extends Component {
     }
 
     render() {
+
+    const nameErrors = this.state.errors.name ?
+        <div class="invalid-feedback">
+            {this.state.errors.name}
+        </div> :
+        "";
+    const nameClass = this.state.errors.name ?
+            " is-invalid" : ""; 
+
         return(
-            <form>
-                <h3>Enter a new product</h3>
-                <p>
-                    <label>
+            <form className="py-2">
+                <h3 className="slender-heading">Enter a new product</h3>
+                <div className="form-group row ">
+                    <label className="col-sm-2 col-form-label">
                         Name
-                        <br />
-                        {this.state.errors.name}
-                        <input 
+                    </label>
+                    <div className="col-sm-10">                
+                        <input
+                            className={`form-control ${nameClass}`} 
                             onBlur={this.handleBlur}
                             onChange={this.handleChange}
                             type="text"
                             name="name"
                             value={this.state.product.name}
                         />
-                    </label>
-                </p>
+                    {nameErrors}
+                    </div>
+                </div>
 
-                <p>
-                    <label>
+                <div className="form-group row ">
+                    <label className="col-sm-2 col-form-label">
                         Category
-                        <br />
+                    </label>
+                    <div className="col-sm-10">
                         <input
+                            className="form-control"
                             onChange={this.handleChange}
                             type="text"
                             name="category"
                             value={this.state.product.category}
                         />
-                    </label>
-                </p>
+                    </div>
+                </div>
 
-                <p>
-                    <label>
+                <div className="form-group row ">
+                    <label className="col-sm-2 col-form-label">
                         Price
-                        <br />
-                        <input 
+                    </label>
+                    <div className="col-sm-10">
+                        <input
+                            className="form-control"
                             onChange={this.handleChange}
                             type="text"
                             name="price"
                             value={this.state.product.price}
                         />
-                    </label>
-                </p>
+                    </div>
+                </div>
 
 
-                <p>
-                    <label>
-                        <input
-                            onChange={this.handleChange}
-                            type="checkbox"
-                            name="stocked"
-                            checked={this.state.product.stocked}
-                        />
+                <div className="form-check col-sm-10 ml-auto pl-4">
+                    <input
+                        className="form-check-input"
+                        onChange={this.handleChange}
+                        type="checkbox"
+                        name="stocked"
+                        checked={this.state.product.stocked}
+                    />
+                    <label className="form-check-label">
                         In stock?
                     </label>
-                </p>
-                <input type="submit" value="Save" onClick={this.handleSave} />
+                </div>
+                <div className="form-group row">
+                    <div className="col-sm-10 ml-auto">
+                        <input
+                            className="btn btn-primary pull-right"
+                            type="submit"
+                            value="Save"
+                            onClick={this.handleSave} />
+                        <input
+                            className="btn btn-secondary pull-right"
+                            type="reset"
+                            value="Cancel" />
+                    </div>
+                </div>
             </form>
         );
     }
