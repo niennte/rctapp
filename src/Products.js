@@ -12,7 +12,7 @@ class Products extends Component {
         this.state = {
             filterText: '',
             inStockOnly: false,
-            editableProduct: '',
+            productBeingEdited: null,
             productData: ProductData
         };
 
@@ -20,6 +20,7 @@ class Products extends Component {
         this.saveProduct = this.saveProduct.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
         this.openProductForEditing = this.openProductForEditing.bind(this);
+        this.closeProduct = this.closeProduct.bind(this);
     }
 
     handleFilter(filterInput) {
@@ -38,13 +39,19 @@ class Products extends Component {
             }
         );
         this.setState({
-            editableProduct: ''
+            productBeingEdited: null
         });
     }
 
     openProductForEditing(productId) {
         this.setState({
-            editableProduct: productId
+            productBeingEdited: this.state.productData[productId]
+        });
+    }
+
+    closeProduct() {
+        this.setState({
+            productBeingEdited: null
         });
     }
 
@@ -69,13 +76,15 @@ class Products extends Component {
                     products={this.state.productData}  
                     filterText={this.state.filterText} 
                     inStockOnly={this.state.inStockOnly}
-                    editableProduct={this.state.editableProduct}
                     onEdit={this.openProductForEditing}
-                    onSave={this.saveProduct}
                     onDelete={this.deleteProduct}
                 >
                 </ProductTable>
-                <ProductForm onSave={this.saveProduct} />
+                <ProductForm
+                    onSave={this.saveProduct}
+                    onCloseProduct={this.closeProduct}
+                    openProduct={this.state.productBeingEdited}
+                />
             </div>
         );
     }

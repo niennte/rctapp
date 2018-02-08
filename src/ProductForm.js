@@ -6,9 +6,9 @@ class ProductForm extends Component {
 
     constructor(props) {
         super(props);
-        if (typeof this.props.openProduct === 'object' && this.props.openProduct !== null) {
+        if (typeof props.openProduct === 'object' && props.openProduct !== null) {
             this.state = {
-                product: this.props.openProduct,
+                product: props.openProduct,
                 errors: {}
             };
         } else {
@@ -20,7 +20,23 @@ class ProductForm extends Component {
         this.handleSave = this.handleSave.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
+        this.handleReset = this.handleReset.bind(this);
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (typeof nextProps.openProduct === 'object' && nextProps.openProduct !== null) {
+            this.setState({
+                product: nextProps.openProduct,
+                errors: {}
+            });
+        } else {
+            this.setState({
+                product: Object.assign({}, RESET_VALUES),
+                errors: {}
+            });
+        }
+    }
+
 
     validateName() {
         if (this.state.product['name'] === '') {
@@ -68,8 +84,15 @@ class ProductForm extends Component {
         e.preventDefault();
     }
 
-    render() {
+    handleReset() {
+        this.props.onCloseProduct();
+        this.setState({
+            product: Object.assign({}, RESET_VALUES),
+            errors: {}
+        });
+    }
 
+    render() {
     const nameErrors = this.state.errors.name ?
         <div class="invalid-feedback">
             {this.state.errors.name}
@@ -151,7 +174,9 @@ class ProductForm extends Component {
                         <input
                             className="btn btn-secondary pull-right"
                             type="reset"
-                            value="Cancel" />
+                            value="Cancel"
+                            onClick={this.handleReset}
+                        />
                     </div>
                 </div>
             </form>
