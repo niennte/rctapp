@@ -45,7 +45,7 @@ class Products extends Component {
 
     openProductForEditing(productId) {
         this.setState({
-            productBeingEdited: this.state.productData[productId]
+            productBeingEdited: Object.assign({}, this.state.productData[productId])
         });
     }
 
