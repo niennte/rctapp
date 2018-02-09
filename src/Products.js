@@ -45,7 +45,7 @@ class Products extends Component {
 
     openProductForEditing(productId) {
         this.setState({
-            productBeingEdited: this.state.productData[productId]
+            productBeingEdited: Object.assign({}, this.state.productData[productId])
         });
     }
 
@@ -64,6 +64,7 @@ class Products extends Component {
     }
 
     render() {
+
         return(
             <div className="Products">
                 <h4 className="slender-heading">Products</h4>
@@ -85,6 +86,9 @@ class Products extends Component {
                     onCloseProduct={this.closeProduct}
                     openProduct={this.state.productBeingEdited}
                 />
+                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#productFormModal">
+                  Add new product
+                </button>
             </div>
         );
     }

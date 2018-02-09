@@ -35,6 +35,8 @@ class ProductRow extends Component {
                     <button
                         onClick={this.edit}
                         className="btn btn-light"
+                        data-toggle="modal"
+                        data-target="#productFormModal"
                     >
                             Edit
                     </button>

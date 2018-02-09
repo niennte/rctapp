@@ -8,11 +8,13 @@ class ProductForm extends Component {
         super(props);
         if (typeof props.openProduct === 'object' && props.openProduct !== null) {
             this.state = {
+                isEdit: true,
                 product: props.openProduct,
                 errors: {}
             };
         } else {
             this.state = {
+                isEdit: false,
                 product: Object.assign({}, RESET_VALUES),
                 errors: {}
             };
@@ -26,11 +28,13 @@ class ProductForm extends Component {
     componentWillReceiveProps(nextProps) {
         if (typeof nextProps.openProduct === 'object' && nextProps.openProduct !== null) {
             this.setState({
+                isEdit: true,
                 product: nextProps.openProduct,
                 errors: {}
             });
         } else {
             this.setState({
+                isEdit: false,
                 product: Object.assign({}, RESET_VALUES),
                 errors: {}
             });
@@ -87,6 +91,7 @@ class ProductForm extends Component {
     handleReset() {
         this.props.onCloseProduct();
         this.setState({
+            isEdit: false,
             product: Object.assign({}, RESET_VALUES),
             errors: {}
         });
@@ -94,36 +99,60 @@ class ProductForm extends Component {
 
     render() {
     const nameErrors = this.state.errors.name ?
-        <div class="invalid-feedback">
+        <div className="invalid-feedback">
             {this.state.errors.name}
         </div> :
         "";
     const nameClass = this.state.errors.name ?
-            " is-invalid" : ""; 
+            " is-invalid" : "";
 
         return(
-            <form className="py-2">
-                <h3 className="slender-heading">Enter a new product</h3>
+<form 
+    className="py-2 modal fade" 
+    id="productFormModal"
+    tabIndex="-1"
+    role="dialog"
+    data-backdrop="static"
+    aria-labelledby="exampleModalLabel" aria-hidden="true"
+    >
+    <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
+            <div className="modal-header">
+                <h5
+                    className="modal-title slender-heading"
+                    id="productFormModalLabel"
+                    >
+                    {this.state.isEdit? "Edit" : "Add new"} product
+                </h5>
+                <button 
+                    onClick={this.handleReset}
+                    type="button" className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    >
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div className="modal-body">
                 <div className="form-group row ">
                     <label className="col-sm-2 col-form-label">
-                        Name
+                    Name
                     </label>
                     <div className="col-sm-10">                
                         <input
-                            className={`form-control ${nameClass}`} 
-                            onBlur={this.handleBlur}
-                            onChange={this.handleChange}
-                            type="text"
-                            name="name"
-                            value={this.state.product.name}
+                        className={`form-control ${nameClass}`} 
+                        onBlur={this.handleBlur}
+                        onChange={this.handleChange}
+                        type="text"
+                        name="name"
+                        value={this.state.product.name}
                         />
-                    {nameErrors}
+                        {nameErrors}
                     </div>
                 </div>
-
                 <div className="form-group row ">
                     <label className="col-sm-2 col-form-label">
-                        Category
+                    Category
                     </label>
                     <div className="col-sm-10">
                         <input
@@ -132,13 +161,12 @@ class ProductForm extends Component {
                             type="text"
                             name="category"
                             value={this.state.product.category}
-                        />
+                            />
                     </div>
                 </div>
-
                 <div className="form-group row ">
                     <label className="col-sm-2 col-form-label">
-                        Price
+                    Price
                     </label>
                     <div className="col-sm-10">
                         <input
@@ -147,11 +175,9 @@ class ProductForm extends Component {
                             type="text"
                             name="price"
                             value={this.state.product.price}
-                        />
+                            />
                     </div>
                 </div>
-
-
                 <div className="form-check col-sm-10 ml-auto pl-4">
                     <input
                         className="form-check-input"
@@ -159,27 +185,30 @@ class ProductForm extends Component {
                         type="checkbox"
                         name="stocked"
                         checked={this.state.product.stocked}
-                    />
+                        />
                     <label className="form-check-label">
-                        In stock?
+                    In stock?
                     </label>
                 </div>
-                <div className="form-group row">
-                    <div className="col-sm-10 ml-auto">
-                        <input
-                            className="btn btn-primary pull-right"
-                            type="submit"
-                            value="Save"
-                            onClick={this.handleSave} />
-                        <input
-                            className="btn btn-secondary pull-right"
-                            type="reset"
-                            value="Cancel"
-                            onClick={this.handleReset}
-                        />
-                    </div>
-                </div>
-            </form>
+            </div>
+            <div className="modal-footer">
+                <input
+                    data-dismiss="modal"
+                    className="btn btn-secondary "
+                    type="reset"
+                    value="Cancel"
+                    onClick={this.handleReset}
+                    />
+                <input
+                    data-dismiss="modal"
+                    className="btn btn-primary "
+                    type="submit"
+                    value="Save"
+                    onClick={this.handleSave} />
+            </div>
+        </div>
+    </div>
+</form>
         );
     }
 }
